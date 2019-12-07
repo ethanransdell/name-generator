@@ -11,4 +11,4 @@
 |
 */
 
-$router->get('/name/full', 'GetNameController');
+$router->get('/name/full[/{count}]', 'GetNameController');

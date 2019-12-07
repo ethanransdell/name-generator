@@ -22,7 +22,7 @@ class NameService
             $lastSuffix = Suffix::random()->first()->value;
         } while ($lastSuffix === $firstSuffix);
 
-        $firstName = $firstPrefix . $lastPrefix;
+        $firstName = $firstPrefix . $firstSuffix;
         $lastName = $lastPrefix . $lastSuffix;
 
         return [
@@ -30,5 +30,13 @@ class NameService
             'first_name' => $firstName,
             'last_name'  => $lastName
         ];
+    }
+
+    public function getMaxCombinations(): int
+    {
+        $prefixCount = Prefix::count();
+        $suffixCount = Suffix::count();
+
+        return pow($prefixCount, 2) * pow($suffixCount, 2);
     }
 }
