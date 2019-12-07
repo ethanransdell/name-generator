@@ -11,8 +11,4 @@
 |
 */
 
-$router->group(['prefix' => 'name'], function () use ($router) {
-    $router->get('first', 'NameController@first');
-    $router->get('last', 'NameController@last');
-    $router->get('full', 'NameController@full');
-});
+$router->get('/name/full', 'GetNameController');

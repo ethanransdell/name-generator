@@ -7,9 +7,9 @@ namespace App\Http\Controllers;
 use App\Prefix;
 use App\Suffix;
 
-class NameController extends Controller
+class GetNameController extends Controller
 {
-    public function full()
+    public function __invoke()
     {
         $first = Prefix::random()->first()->value . Suffix::random()->first()->value;
         $last = Prefix::random()->first()->value . Suffix::random()->first()->value;
@@ -19,15 +19,5 @@ class NameController extends Controller
             'first_name' => $first,
             'last_name'  => $last
         ];
-    }
-
-    public function first()
-    {
-        return ['first_name' => Prefix::random()->first()->value . Suffix::random()->first()->value];
-    }
-
-    public function last()
-    {
-        return ['last_name' => Prefix::random()->first()->value . Suffix::random()->first()->value];
     }
 }
