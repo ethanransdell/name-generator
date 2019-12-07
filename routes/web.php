@@ -16,3 +16,7 @@ $router->get('', function () {
 });
 
 $router->get('/name/full[/{count}]', 'GetNameController');
+
+$router->get('/dwarves', function(){
+	return view('dwarf.generator');
+})
