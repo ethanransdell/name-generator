@@ -11,4 +11,8 @@
 |
 */
 
+$router->get('', function () {
+    return view('Frontend.frontend');
+});
+
 $router->get('/name/full[/{count}]', 'GetNameController');
