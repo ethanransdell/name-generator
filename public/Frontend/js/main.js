@@ -15,12 +15,11 @@ class Dwarf {
 function getDwarves(){
 	$.ajax({
 	 	url: "http://192.168.2.16/name/full/10",
-	 	 	success: function(result){
-	 	 		$('.dwarf-names').text('');
-				$.each(result, function( i, val ) {
-
-	 	 			$('.dwarf-names').append(val.full_name + "<br>");
-				});
+ 	 	success: function(result){
+ 	 		$('.dwarf-names').text('');
+			$.each(result, function( i, val ) {
+ 	 			dwarfNameDiv.append(val.full_name + "<br>");
+			});
 	  	}
 	});
 }
