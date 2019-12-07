@@ -11,10 +11,8 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-
-    return $router->app->version();
-});
-$router->get('/key', function() {
-    return \Illuminate\Support\Str::random(32);
+$router->group(['prefix' => 'name'], function () use ($router) {
+    $router->get('first', 'NameController@first');
+    $router->get('last', 'NameController@last');
+    $router->get('full', 'NameController@full');
 });
