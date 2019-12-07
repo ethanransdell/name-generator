@@ -3,21 +3,36 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Prefix;
-use App\Suffix;
+use App\Services\NameService;
+use Exception;
+use Illuminate\Http\Request;
 
 class GetNameController extends Controller
 {
-    public function __invoke()
+    public function __invoke($count = 1, Request $request, NameService $nameService)
     {
-        $first = Prefix::random()->first()->value . Suffix::random()->first()->value;
-        $last = Prefix::random()->first()->value . Suffix::random()->first()->value;
+        $maxCombinations = $nameService->getMaxCombinations();
 
-        return [
-            'full_name'  => "$first $last",
-            'first_name' => $first,
-            'last_name'  => $last
-        ];
+        if ($count > $maxCombinations) {
+            throw new Exception("No more than $maxCombinations names may be requested.");
+        }
+
+        $search = [];
+        $names = [];
+
+        $i = 0;
+        while ($i < $count) {
+            do {
+                $name = $nameService->getName();
+                $hash = md5($name['full_name']);
+            } while (in_array($hash, $search));
+
+            $names[] = $name;
+            $search[] = $hash;
+
+            $i++;
+        }
+
+        return $names;
     }
 }
